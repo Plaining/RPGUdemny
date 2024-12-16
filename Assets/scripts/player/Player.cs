@@ -1,16 +1,12 @@
 using System.Collections;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : Entity
 {
     [Header("Attack details")]
     public Vector2[] attackMovement;//每次攻击时，附带的移动属性
 
     public bool isBusy {  get; private set; }
-
-    [Header("Move info")]
-    public float moveSpeed = 3f;
-    public float jumpForce = 10f;
 
     [Header("Dash info")]
     [SerializeField] private float dashCooldown;
@@ -18,25 +14,11 @@ public class Player : MonoBehaviour
     public float dashSpeed = 6.0f;
     public float dashDuration = 10.0f;
     public float dashDir { get; private set; }
-    
-
-    [Header("Collision info")]
-    [SerializeField] private Transform groudCheck;
-    [SerializeField] private float groundCheckDistance;
-    [SerializeField] private Transform wallCheck;
-    [SerializeField] private float wallCheckDistance;
-    [SerializeField] private LayerMask WhatIsGround;
-
-    public int facingDir { get; private set; } = 1;
-    public bool facingRight = true;
 
     [Header("Slide info")]
     [SerializeField] public float wallSlideSpeed = 0.8f;
 
     #region Components
-    public Animator anim {  get; private set; }
-    public Rigidbody2D rb { get; private set; }
-
     public PlayerStateMachine stateMachine { get; private set; }
     #endregion
     #region States
@@ -51,8 +33,9 @@ public class Player : MonoBehaviour
 
     #endregion
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         stateMachine =  new PlayerStateMachine();
         idleState = new PlayerIdleState(this, stateMachine,"Idle");
         moveState = new PlayerMoveState(this, stateMachine, "Move");
@@ -63,15 +46,15 @@ public class Player : MonoBehaviour
         wallJumpState = new PlayerWallJumpState(this, stateMachine, "Jump");
         primaryAttackState = new PlayerPrimaryAttackState(this, stateMachine, "Attack");
     }
-    private void Start()
+    protected override void Start()
     {
-        anim = GetComponentInChildren<Animator>();
-        rb = GetComponent<Rigidbody2D>();
+        base.Start();
         stateMachine.Initialize(idleState);
     }
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
         stateMachine.currentState.Update();
         CheckForDashInput();
     }
@@ -80,9 +63,7 @@ public class Player : MonoBehaviour
     {
         isBusy = true;
 
-        Debug.Log("isBusy");
         yield return new WaitForSeconds(_seconds);
-        Debug.Log("is not Busy");
 
         isBusy = false;
     }
@@ -99,52 +80,10 @@ public class Player : MonoBehaviour
             {
                 dashDir = facingDir;
             }
-            Debug.Log(dashDir);
             stateMachine.ChangeState(dashState);
         }
     }
-    #region Velocity
-    public void zeroVelocity()
-    {
-        rb.linearVelocity = new Vector2 (0, 0);
-    }
-
-    public void SetVelocity(float _xVelocity, float _yVelocity)
-    {
-        rb.linearVelocity = new Vector2(_xVelocity * moveSpeed, _yVelocity);
-        FlipController(rb.linearVelocityX);
-    }
-    #endregion
-    #region Collision
-    public bool isGroundDetected() => Physics2D.Raycast(groudCheck.position, Vector2.down, groundCheckDistance, WhatIsGround);
-    public bool isWallDetected() => Physics2D.Raycast(wallCheck.position, Vector2.right * facingDir, wallCheckDistance, WhatIsGround);
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawLine(groudCheck.position, new Vector3(groudCheck.position.x, groudCheck.position.y - groundCheckDistance));
-        Gizmos.DrawLine(wallCheck.position, new Vector3(wallCheck.position.x + wallCheckDistance, wallCheck.position.y));
-    }
-    #endregion
-    #region Flip
-    public void Flip()
-    {
-        facingDir *= -1;
-        facingRight = !facingRight;
-        transform.Rotate(0, 180, 0);
-    }
-    public void FlipController(float _x)
-    {
-        if (_x > 0 && !facingRight)
-        {//如果有向右的向量，且不是面向右边，需要flip
-            Flip();
-        }
-        else if(_x < 0 && facingRight)//如果有向左的速度向量，且不是面向左边，需要Flip
-        {
-            Flip();
-        }
-    }
-    #endregion
-
+ 
     public void AnimationTrigger()
     {
         stateMachine.currentState.AnimationFinishTrigger();

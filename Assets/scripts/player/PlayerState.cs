@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerState
+public class PlayerState 
 {
     protected PlayerStateMachine stateMachine;
     protected Player player;
