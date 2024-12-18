@@ -1,9 +1,10 @@
 using UnityEngine;
 
-public class EnermyMoveState : EnermyState
+public class EnermyMoveState : EnermygGroundState
 {
-    public EnermyMoveState(Enermy _enermy, EnermyStateMachine _stateMachine, string _animBoolName) : base(_enermy, _stateMachine, _animBoolName)
+    public EnermyMoveState(Enermy_Skeleton _enermy, EnermyStateMachine _stateMachine, string _animBoolName) : base(_enermy, _stateMachine, _animBoolName)
     {
+        this.enermy = _enermy;
     }
 
     public override void Enter()
@@ -25,6 +26,7 @@ public class EnermyMoveState : EnermyState
         if (!enermy.isGroundDetected() || enermy.isWallDetected())
         {
             enermy.Flip();
+            stateMachine.ChangeState(enermy.IdleState);
         }
     }
 }

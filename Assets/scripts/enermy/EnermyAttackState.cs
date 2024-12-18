@@ -1,9 +1,10 @@
 using UnityEngine;
 
-public class EnermyAttackState : EnermyState
+public class EnermyAttackState : EnermygGroundState
 {
-    public EnermyAttackState(Enermy _enermy, EnermyStateMachine _stateMachine, string _animBoolName) : base(_enermy, _stateMachine, _animBoolName)
+    public EnermyAttackState(Enermy_Skeleton _enermy, EnermyStateMachine _stateMachine, string _animBoolName) : base(_enermy, _stateMachine, _animBoolName)
     {
+        this.enermy = _enermy;
     }
 
     public override void Enter()

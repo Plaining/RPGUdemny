@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnermyDeadState : EnermyState
 {
-    public EnermyDeadState(Enermy _enermy, EnermyStateMachine _stateMachine, string _animBoolName) : base(_enermy, _stateMachine, _animBoolName)
+    public EnermyDeadState(Enermy_Skeleton _enermy, EnermyStateMachine _stateMachine, string _animBoolName) : base(_enermy, _stateMachine, _animBoolName)
     {
     }
 

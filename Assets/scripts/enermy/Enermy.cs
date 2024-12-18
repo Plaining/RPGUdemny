@@ -2,43 +2,43 @@ using UnityEngine;
 
 public class Enermy : Entity
 {
+    [Header("PlayerCheck info")]
+    [SerializeField] protected Transform playerCheck;
+    [SerializeField] protected float playerCheckDistance;
+    [SerializeField] protected LayerMask WhatIsPlayer;
+    [Header("Attack info")]
+    [SerializeField] public float attackDistance;
+
+    [Header("Move info")]
+    public float idleTime;
     #region
-    public EnermyStateMachine StateMachine {  get; private set; }
-    #endregion
-    #region
-    public EnermyStateMachine stateMachine { get; private set; }
-    public EnermyIdleState idleState { get; private set; }
-    public EnermyAttackState attackState { get; private set; }
-    public EnermyHitState hitState { get; private set; }
-    public EnermyMoveState moveState { get; private set; }
-    public EnermyDeadState deadState { get; private set; }
-    
+    public EnermyStateMachine StateMachine { get; private set; }
 
     #endregion
     protected override void Awake()
     {
         base.Awake();
-        stateMachine = new EnermyStateMachine();
-        idleState = new EnermyIdleState(this, stateMachine, "Idle");
-        attackState = new EnermyAttackState(this, stateMachine, "Attack");
-        hitState = new EnermyHitState(this, stateMachine, "Hit");
-        moveState = new EnermyMoveState(this, stateMachine, "Move");
-        deadState = new EnermyDeadState(this, stateMachine, "Dead");
+        StateMachine = new EnermyStateMachine();
     }
-
     protected override void Start()
     {
         base.Start();
-        stateMachine.Initialize(moveState);
     }
-
     protected override void Update()
     {
         base.Update();
-        stateMachine.currentState.Update();
+        StateMachine.currentState.Update();
     }
     public void AnimationTrigger()
     {
-        stateMachine.currentState.AnimationFinishTrigger();
+        StateMachine.currentState.AnimationFinishTrigger();
+    }
+    public virtual RaycastHit2D isPlayerDetected() => Physics2D.Raycast(playerCheck.position, Vector2.right * facingDir, playerCheckDistance, WhatIsPlayer);
+
+    protected override void OnDrawGizmos()
+    {
+        base.OnDrawGizmos();
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawLine(transform.position, new Vector3(transform.position.x + attackDistance * facingDir, transform.position.y));
     }
 }

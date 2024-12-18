@@ -119,6 +119,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &160848699
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 160848700}
+  m_Layer: 0
+  m_Name: PlayerCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &160848700
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 160848699}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.31, y: -0.63460225, z: 0.06606263}
+  m_LocalScale: {x: 3.2, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 575949988}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &193744262
 GameObject:
   m_ObjectHideFlags: 0
@@ -356,7 +387,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 390645561}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WallCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -648,7 +679,7 @@ GameObject:
   - component: {fileID: 575949988}
   - component: {fileID: 575949990}
   - component: {fileID: 575949991}
-  - component: {fileID: 575949989}
+  - component: {fileID: 575949992}
   m_Layer: 0
   m_Name: Enermy
   m_TagString: Untagged
@@ -665,37 +696,16 @@ Transform:
   m_GameObject: {fileID: 575949987}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.5, y: -2.77, z: 0}
+  m_LocalPosition: {x: -8.05, y: -2.77, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 386566904}
   - {fileID: 699613246}
   - {fileID: 348739153}
+  - {fileID: 160848700}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &575949989
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 575949987}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f809b515102ead46a671763665fab1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 3
-  jumpForce: 10
-  facingRight: 1
-  groudCheck: {fileID: 699613246}
-  groundCheckDistance: 0.14
-  wallCheck: {fileID: 348739153}
-  wallCheckDistance: 0.14
-  WhatIsGround:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!50 &575949990
 Rigidbody2D:
   serializedVersion: 5
@@ -760,6 +770,35 @@ CapsuleCollider2D:
   m_Offset: {x: -0.21432525, y: -0.19901627}
   m_Size: {x: 1.0633689, y: 1.6307284}
   m_Direction: 0
+--- !u!114 &575949992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 575949987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8829a454bd5ddb45bf2b732ba163f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 1
+  jumpForce: 10
+  facingRight: 1
+  groudCheck: {fileID: 699613246}
+  groundCheckDistance: 0.14
+  wallCheck: {fileID: 348739153}
+  wallCheckDistance: 0.1
+  WhatIsGround:
+    serializedVersion: 2
+    m_Bits: 8
+  playerCheck: {fileID: 160848700}
+  playerCheckDistance: 50
+  WhatIsPlayer:
+    serializedVersion: 2
+    m_Bits: 64
+  attackDistance: 1
+  idleTime: 0.3
 --- !u!1 &617159460
 GameObject:
   m_ObjectHideFlags: 0
@@ -1002,7 +1041,7 @@ Transform:
   m_GameObject: {fileID: 699613245}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.991, z: 0}
+  m_LocalPosition: {x: 0.4, y: -0.991, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1020,7 +1059,7 @@ GameObject:
   - component: {fileID: 726821544}
   - component: {fileID: 726821545}
   - component: {fileID: 726821546}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1121,8 +1160,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8752b20397878184d9ee0bdb9f51dff7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
-  jumpForce: 15
+  moveSpeed: 3
+  jumpForce: 10
   facingRight: 1
   groudCheck: {fileID: 865463768}
   groundCheckDistance: 0.15
@@ -1235,7 +1274,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 865463768}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1462,7 +1501,7 @@ GameObject:
   - component: {fileID: 1246776446}
   - component: {fileID: 1246776445}
   - component: {fileID: 1246776447}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Animator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
