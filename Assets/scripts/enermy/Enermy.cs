@@ -7,10 +7,13 @@ public class Enermy : Entity
     [SerializeField] protected float playerCheckDistance;
     [SerializeField] protected LayerMask WhatIsPlayer;
     [Header("Attack info")]
-    [SerializeField] public float attackDistance;
+    public float attackDistance;
+    public float attackCoolDown;
+    [HideInInspector] public float lastTimeAttacked;
 
     [Header("Move info")]
     public float idleTime;
+    public float battleTime;
     #region
     public EnermyStateMachine StateMachine { get; private set; }
 

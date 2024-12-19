@@ -22,37 +22,37 @@ AnimationClip:
     curve:
     - time: 0
       value: {fileID: -862072993, guid: cc71415bc56e07742a0bede3d4be6d2f, type: 3}
-    - time: 0.016666668
+    - time: 0.05
       value: {fileID: 111903536, guid: cc71415bc56e07742a0bede3d4be6d2f, type: 3}
-    - time: 0.06666667
+    - time: 0.05
       value: {fileID: -2055602260, guid: cc71415bc56e07742a0bede3d4be6d2f, type: 3}
-    - time: 0.083333336
+    - time: 0.1
       value: {fileID: 764298264, guid: cc71415bc56e07742a0bede3d4be6d2f, type: 3}
-    - time: 0.11666667
+    - time: 0.15
       value: {fileID: 1537726011, guid: cc71415bc56e07742a0bede3d4be6d2f, type: 3}
-    - time: 0.13333334
+    - time: 0.15
       value: {fileID: 1364081774, guid: cc71415bc56e07742a0bede3d4be6d2f, type: 3}
-    - time: 0.18333334
+    - time: 0.2
       value: {fileID: 1526894858, guid: cc71415bc56e07742a0bede3d4be6d2f, type: 3}
     - time: 0.2
       value: {fileID: 1271217771, guid: cc71415bc56e07742a0bede3d4be6d2f, type: 3}
-    - time: 0.23333333
+    - time: 0.25
       value: {fileID: 496356037, guid: cc71415bc56e07742a0bede3d4be6d2f, type: 3}
-    - time: 0.26666668
+    - time: 0.25
       value: {fileID: -616826033, guid: cc71415bc56e07742a0bede3d4be6d2f, type: 3}
     - time: 0.3
       value: {fileID: 768936061, guid: cc71415bc56e07742a0bede3d4be6d2f, type: 3}
-    - time: 0.31666666
+    - time: 0.3
       value: {fileID: -1865620554, guid: cc71415bc56e07742a0bede3d4be6d2f, type: 3}
-    - time: 0.36666667
+    - time: 0.35
       value: {fileID: 1190190328, guid: cc71415bc56e07742a0bede3d4be6d2f, type: 3}
-    - time: 0.38333333
+    - time: 0.35
       value: {fileID: 946315996, guid: cc71415bc56e07742a0bede3d4be6d2f, type: 3}
-    - time: 0.41666666
+    - time: 0.4
       value: {fileID: -1558267337, guid: cc71415bc56e07742a0bede3d4be6d2f, type: 3}
-    - time: 0.43333334
+    - time: 0.45
       value: {fileID: 2145530206, guid: cc71415bc56e07742a0bede3d4be6d2f, type: 3}
-    - time: 0.48333332
+    - time: 0.45
       value: {fileID: 987642772, guid: cc71415bc56e07742a0bede3d4be6d2f, type: 3}
     - time: 0.5
       value: {fileID: -583450777, guid: cc71415bc56e07742a0bede3d4be6d2f, type: 3}
@@ -120,4 +120,11 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0.5
+    functionName: AnimationTrigger
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
