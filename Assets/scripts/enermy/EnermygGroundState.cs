@@ -25,9 +25,6 @@ public class EnermygGroundState : EnermyState
     {
         base.Update();
         if (enermy.isPlayerDetected() || Vector2.Distance(enermy.transform.position, player.position) < 2)
-        if (enermy.isPlayerDetected() || Vector2.Distance(enermy.transform.position, player.position) < 2)
-        if (enermy.isPlayerDetected() || Vector2.Distance(enermy.transform.position, player.position) < 2)
-        if (enermy.isPlayerDetected() || Vector2.Distance(enermy.transform.position, player.position) < 2)
         {
             stateMachine.ChangeState(enermy.BattleState);
         }
