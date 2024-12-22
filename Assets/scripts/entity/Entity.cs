@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 
@@ -11,7 +12,14 @@ public class Entity : MonoBehaviour
     public int facingDir { get; private set; } = 1;
     public bool facingRight = true;
 
+    [Header("Knockback info")]
+    [SerializeField] protected Vector2 knockbackDirection;
+    [SerializeField] protected float knockbackDuration; //0.07是最好的数值，被击退的距离
+    protected bool isKnocked;
+
     [Header("Collision info")]
+    public Transform attackCheck;
+    public float attackCheckRadius;
     [SerializeField] protected Transform groudCheck;
     [SerializeField] protected float groundCheckDistance;
     [SerializeField] protected Transform wallCheck;
@@ -22,6 +30,7 @@ public class Entity : MonoBehaviour
     #region Components
     public Animator anim { get; private set; }
     public Rigidbody2D rb { get; private set; }
+    public EntityFX fx { get; private set; }
     #endregion
 
     protected virtual void Awake()
@@ -31,6 +40,7 @@ public class Entity : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected virtual void Start()
     {
+        fx = GetComponent<EntityFX>();
         anim = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
     }
@@ -41,14 +51,36 @@ public class Entity : MonoBehaviour
         
     }
 
+    public virtual void Damage()
+    {
+        fx.StartCoroutine("FlashFX");
+        StartCoroutine("HitKnockback");
+        Debug.Log(gameObject.name + " was damaged");
+    }
+
+    protected virtual IEnumerator HitKnockback()
+    {
+        Debug.Log("HitKnock");
+
+        isKnocked = true;
+        rb.linearVelocity = new Vector2(knockbackDirection.x * -facingDir, knockbackDirection.y);
+        yield return new WaitForSeconds(knockbackDuration);
+        isKnocked = false;
+    }
+
     #region Velocity
     public virtual void zeroVelocity()
     {
-        rb.linearVelocity = new Vector2(0, 0);
+        SetVelocity(0, 0);
     }
 
     public virtual void SetVelocity(float _xVelocity, float _yVelocity)
     {
+        if (isKnocked)
+        {
+            //如果玩家被击退了，僵直
+            return;
+        }
         rb.linearVelocity = new Vector2(_xVelocity * moveSpeed, _yVelocity);
         FlipController(rb.linearVelocityX);
     }
@@ -61,6 +93,7 @@ public class Entity : MonoBehaviour
     {
         Gizmos.DrawLine(groudCheck.position, new Vector3(groudCheck.position.x, groudCheck.position.y - groundCheckDistance));
         Gizmos.DrawLine(wallCheck.position, new Vector3(wallCheck.position.x + wallCheckDistance, wallCheck.position.y));
+        Gizmos.DrawWireSphere(attackCheck.position,attackCheckRadius);
     }
     #endregion
     #region Flip

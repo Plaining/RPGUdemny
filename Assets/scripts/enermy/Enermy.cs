@@ -2,6 +2,10 @@ using UnityEngine;
 
 public class Enermy : Entity
 {
+    [Header("Stunned info")]
+    public float stunnedDuration;
+    public Vector2 stunnedDirection;
+
     [Header("PlayerCheck info")]
     [SerializeField] protected Transform playerCheck;
     [SerializeField] protected float playerCheckDistance;

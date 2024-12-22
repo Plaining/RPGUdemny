@@ -4,7 +4,7 @@ public class EnermyAttackState : EnermyState
 {
     private Enermy_Skeleton enermy;
 
-    public EnermyAttackState(Enermy_Skeleton _enermy, EnermyStateMachine _stateMachine, string _animBoolName) : base(_enermy, _stateMachine, _animBoolName)
+    public EnermyAttackState(Enermy _enermyBase, EnermyStateMachine _stateMachine, string _animBoolName, Enermy_Skeleton _enermy) : base(_enermyBase, _stateMachine, _animBoolName)
     {
         enermy = _enermy;
     }

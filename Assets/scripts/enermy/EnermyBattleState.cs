@@ -5,7 +5,7 @@ public class EnermyBattleState : EnermyState
     private Transform player;
     private Enermy_Skeleton enermy;
     private int moveDir;
-    public EnermyBattleState(Enermy_Skeleton _enermy, EnermyStateMachine _stateMachine, string _animBoolName) : base(_enermy, _stateMachine, _animBoolName)
+    public EnermyBattleState(Enermy _enermyBase, EnermyStateMachine _stateMachine, string _animBoolName, Enermy_Skeleton _enermy) : base(_enermyBase, _stateMachine, _animBoolName)
     {
         this.enermy = _enermy;
     }
@@ -13,7 +13,6 @@ public class EnermyBattleState : EnermyState
     public override void Enter()
     {
         base.Enter();
-        Debug.Log("I see you");
         player = GameObject.Find("Player").transform;
     }
 
@@ -30,9 +29,6 @@ public class EnermyBattleState : EnermyState
             stateTimer = enermy.battleTime;
             if (enermy.isPlayerDetected().distance < enermy.attackDistance && canAttack())
             {
-                /*Debug.Log("Change to attack");
-                enermy.zeroVelocity();
-                return;*/
                 stateMachine.ChangeState(enermy.AttackState);
             }
         }
