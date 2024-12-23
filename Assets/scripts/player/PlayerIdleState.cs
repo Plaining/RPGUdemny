@@ -9,7 +9,7 @@ public class PlayerIdleState : PlayerGroundState
     public override void Enter()
     {
         base.Enter();
-        player.zeroVelocity();
+        player.setZeroVelocity();
     }
 
     public override void Exit()

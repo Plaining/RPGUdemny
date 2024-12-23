@@ -11,6 +11,7 @@ public class SkeletonStunnedState : EnermyState
     public override void Enter()
     {
         base.Enter();
+        enermy.fx.InvokeRepeating("RedColerBlink", 0, .1f);
         stateTimer = enermy.stunnedDuration;
         rb.linearVelocity = new Vector2(-enermy.facingDir * enermy.stunnedDirection.x, enermy.stunnedDirection.y);
     }
@@ -18,6 +19,7 @@ public class SkeletonStunnedState : EnermyState
     public override void Exit()
     {
         base.Exit();
+        enermy.fx.Invoke("CancelRedBlink",0);
     }
 
     public override void Update()

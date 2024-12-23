@@ -5,7 +5,7 @@ public class Player : Entity
 {
     [Header("Attack details")]
     public Vector2[] attackMovement;//每次攻击时，附带的移动属性
-
+    public float counterAttackDuration = .2f;
     public bool isBusy {  get; private set; }
 
     [Header("Dash info")]
@@ -30,6 +30,7 @@ public class Player : Entity
     public PlayerWallSlideState wallSlideState { get; private set; }
     public PlayerWallJumpState wallJumpState { get; private set; }
     public PlayerPrimaryAttackState primaryAttackState { get; private set; }
+    public PlayerCounterAttackState counterAttackState { get; private set; }
 
     #endregion
 
@@ -45,6 +46,7 @@ public class Player : Entity
         wallSlideState = new PlayerWallSlideState(this, stateMachine, "WallSlide");
         wallJumpState = new PlayerWallJumpState(this, stateMachine, "Jump");
         primaryAttackState = new PlayerPrimaryAttackState(this, stateMachine, "Attack");
+        counterAttackState = new PlayerCounterAttackState(this, stateMachine, "CounterAttack");
     }
     protected override void Start()
     {

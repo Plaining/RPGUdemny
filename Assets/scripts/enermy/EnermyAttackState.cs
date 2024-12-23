@@ -12,7 +12,7 @@ public class EnermyAttackState : EnermyState
     public override void Enter()
     {
         base.Enter();
-        //enermy.zeroVelocity();
+        //enermy.setZeroVelocity();
     }
 
     public override void Exit()
@@ -24,7 +24,7 @@ public class EnermyAttackState : EnermyState
     public override void Update()
     {
         base.Update();
-        enermy.zeroVelocity();
+        enermy.setZeroVelocity();
 
         if (triggerCalled)
         {

@@ -20,4 +20,6 @@ public class EnermySkelenAnimationTrigger : MonoBehaviour
             }
         }
     }
+    private void OpenCounterWindow() => enermy.OpenCounterAttackWindow();
+    private void CloseCounterWindow()=> enermy.CloseCounterAttackWindow();
 }

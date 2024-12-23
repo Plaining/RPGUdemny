@@ -5,6 +5,8 @@ public class Enermy : Entity
     [Header("Stunned info")]
     public float stunnedDuration;
     public Vector2 stunnedDirection;
+    protected bool canBeStunned;
+    [SerializeField] protected GameObject counterImage;/*在敌人头上提示可打击的时机*/
 
     [Header("PlayerCheck info")]
     [SerializeField] protected Transform playerCheck;
@@ -36,6 +38,32 @@ public class Enermy : Entity
         base.Update();
         StateMachine.currentState.Update();
     }
+
+    public virtual void OpenCounterAttackWindow()
+    {
+        canBeStunned = true;
+        counterImage.SetActive(true);
+    }
+
+    public virtual void CloseCounterAttackWindow()
+    {
+        canBeStunned = false;
+        counterImage.SetActive(false);
+    }
+
+    public virtual bool CanBeStunned()
+    {
+        if (canBeStunned)
+        {
+            CloseCounterAttackWindow();
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     public void AnimationTrigger()
     {
         StateMachine.currentState.AnimationFinishTrigger();

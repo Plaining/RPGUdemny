@@ -34,4 +34,17 @@ public class Enermy_Skeleton : Enermy
             StateMachine.ChangeState(StunnedState);
         }
     }
+
+    public override bool CanBeStunned()
+    {
+        if (base.CanBeStunned())
+        {
+            StateMachine.ChangeState(StunnedState);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }

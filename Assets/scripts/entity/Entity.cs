@@ -69,7 +69,7 @@ public class Entity : MonoBehaviour
     }
 
     #region Velocity
-    public virtual void zeroVelocity()
+    public virtual void setZeroVelocity()
     {
         SetVelocity(0, 0);
     }

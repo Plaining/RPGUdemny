@@ -10,7 +10,7 @@ public class EnermyIdleState : EnermygGroundState
     public override void Enter()
     {
         base.Enter();
-        enermy.zeroVelocity();
+        enermy.setZeroVelocity();
         stateTimer = enermy.idleTime;
     }
 
