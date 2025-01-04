@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Player : Entity
@@ -9,15 +10,13 @@ public class Player : Entity
     public bool isBusy {  get; private set; }
 
     [Header("Dash info")]
-    [SerializeField] private float dashCooldown;
-    private float dashUsageTimer;
     public float dashSpeed = 6.0f;
     public float dashDuration = 10.0f;
     public float dashDir { get; private set; }
 
     [Header("Slide info")]
     [SerializeField] public float wallSlideSpeed = 0.8f;
-
+    public SkillManager skill {  get; private set; }
     #region Components
     public PlayerStateMachine stateMachine { get; private set; }
     #endregion
@@ -51,6 +50,7 @@ public class Player : Entity
     protected override void Start()
     {
         base.Start();
+        skill = SkillManager.instance;
         stateMachine.Initialize(idleState);
     }
 
@@ -72,11 +72,13 @@ public class Player : Entity
 
     private void CheckForDashInput()
     {
-        dashUsageTimer -= Time.deltaTime;
-
-        if (Input.GetKeyDown(KeyCode.LeftShift) && dashUsageTimer < 0)
+        if (isWallDetected())
         {
-            dashUsageTimer = dashCooldown;
+            return;
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftShift) && SkillManager.instance.dash.CanUserSkill() )
+        {
             dashDir = Input.GetAxisRaw("Horizontal");
             if(dashDir == 0)
             {

@@ -55,13 +55,10 @@ public class Entity : MonoBehaviour
     {
         fx.StartCoroutine("FlashFX");
         StartCoroutine("HitKnockback");
-        Debug.Log(gameObject.name + " was damaged");
     }
 
     protected virtual IEnumerator HitKnockback()
     {
-        Debug.Log("HitKnock");
-
         isKnocked = true;
         rb.linearVelocity = new Vector2(knockbackDirection.x * -facingDir, knockbackDirection.y);
         yield return new WaitForSeconds(knockbackDuration);
