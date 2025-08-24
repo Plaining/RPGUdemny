@@ -9,6 +9,11 @@ public class Player : Entity
     public float counterAttackDuration = .2f;
     public bool isBusy {  get; private set; }
 
+    [Header("Move info")]
+    public float swordReturnImpact;
+    public float moveSpeed = 3f;
+    public float jumpForce = 10f;
+
     [Header("Dash info")]
     public float dashSpeed = 6.0f;
     public float dashDuration = 10.0f;
@@ -17,6 +22,7 @@ public class Player : Entity
     [Header("Slide info")]
     [SerializeField] public float wallSlideSpeed = 0.8f;
     public SkillManager skill {  get; private set; }
+    public GameObject sword { get; private set; }
     #region Components
     public PlayerStateMachine stateMachine { get; private set; }
     #endregion
@@ -30,6 +36,8 @@ public class Player : Entity
     public PlayerWallJumpState wallJumpState { get; private set; }
     public PlayerPrimaryAttackState primaryAttackState { get; private set; }
     public PlayerCounterAttackState counterAttackState { get; private set; }
+    public PlayerAimSwordState aimSwordState { get; private set; }
+    public PlayerCatchSwordState catchSwordState { get; private set; }
 
     #endregion
 
@@ -46,6 +54,8 @@ public class Player : Entity
         wallJumpState = new PlayerWallJumpState(this, stateMachine, "Jump");
         primaryAttackState = new PlayerPrimaryAttackState(this, stateMachine, "Attack");
         counterAttackState = new PlayerCounterAttackState(this, stateMachine, "CounterAttack");
+        aimSwordState = new PlayerAimSwordState(this, stateMachine, "AimSword");
+        catchSwordState = new PlayerCatchSwordState(this, stateMachine, "CatchSword");
     }
     protected override void Start()
     {
@@ -60,7 +70,19 @@ public class Player : Entity
         stateMachine.currentState.Update();
         CheckForDashInput();
     }
+
+    public void AssignNewSword(GameObject _newSword)
+    {
+        sword = _newSword;
+    }
+    public void catchTheSword()
+    {
+        stateMachine.ChangeState(catchSwordState);
+        Destroy(sword);
+    }
+
 /*用来解决attack1，2，3之间有idle切换的问题。因为现在每次切换为idle时，如果xInput不是空，那么就会进入move状态机，这里加一段时间僵直*/
+   
     public IEnumerator BusyFor(float _seconds)
     {
         isBusy = true;

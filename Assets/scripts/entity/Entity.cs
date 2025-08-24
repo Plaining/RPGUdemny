@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
-
-    [Header("Move info")]
-    public float moveSpeed = 3f;
-    public float jumpForce = 10f;
-
     public int facingDir { get; private set; } = 1;
     public bool facingRight = true;
 
@@ -78,7 +73,7 @@ public class Entity : MonoBehaviour
             //如果玩家被击退了，僵直
             return;
         }
-        rb.linearVelocity = new Vector2(_xVelocity * moveSpeed, _yVelocity);
+        rb.linearVelocity = new Vector2(_xVelocity, _yVelocity);
         FlipController(rb.linearVelocityX);
     }
     #endregion

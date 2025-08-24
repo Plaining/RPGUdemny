@@ -20,4 +20,9 @@ public class PalyerAnimationTrigger : MonoBehaviour
             }
         }
     }
+
+    private void ThrowSword()
+    {
+        SkillManager.instance.sword.CreateSword();
+    }
 }

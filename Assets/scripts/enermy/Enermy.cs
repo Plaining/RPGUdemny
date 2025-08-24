@@ -20,6 +20,9 @@ public class Enermy : Entity
     [Header("Move info")]
     public float idleTime;
     public float battleTime;
+    public float moveSpeed;
+    public float jumpForce;
+
     #region
     public EnermyStateMachine StateMachine { get; private set; }
 
