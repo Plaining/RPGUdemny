@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Enermy : Entity
@@ -22,6 +23,8 @@ public class Enermy : Entity
     public float battleTime;
     public float moveSpeed;
     public float jumpForce;
+    private float defaultMoveSpeed;
+    
 
     #region
     public EnermyStateMachine StateMachine { get; private set; }
@@ -31,6 +34,7 @@ public class Enermy : Entity
     {
         base.Awake();
         StateMachine = new EnermyStateMachine();
+        defaultMoveSpeed = moveSpeed;
     }
     protected override void Start()
     {
@@ -41,7 +45,28 @@ public class Enermy : Entity
         base.Update();
         StateMachine.currentState.Update();
     }
+    public virtual void FreezeTime(bool _timeFrozen)
+    {
+        if (_timeFrozen)
+        {
+            moveSpeed = 0f;
+            anim.speed = 0f;
+        }
+        else
+        {
+            moveSpeed = defaultMoveSpeed;
+            anim.speed = 1f;
+        }
+    }
 
+    protected virtual IEnumerator FreezeTimerFor(float _seconds)
+    {
+        FreezeTime(true);
+        yield return new WaitForSeconds(_seconds);
+        FreezeTime(false);
+    }
+
+    #region AttackWindow
     public virtual void OpenCounterAttackWindow()
     {
         canBeStunned = true;
@@ -53,7 +78,7 @@ public class Enermy : Entity
         canBeStunned = false;
         counterImage.SetActive(false);
     }
-
+    #endregion
     public virtual bool CanBeStunned()
     {
         if (canBeStunned)

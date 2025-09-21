@@ -6,6 +6,7 @@ public class Entity : MonoBehaviour
 {
     public int facingDir { get; private set; } = 1;
     public bool facingRight = true;
+    public SpriteRenderer sr { get; private set; }
 
     [Header("Knockback info")]
     [SerializeField] protected Vector2 knockbackDirection;
@@ -38,6 +39,7 @@ public class Entity : MonoBehaviour
         fx = GetComponent<EntityFX>();
         anim = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        sr = GetComponentInChildren<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -108,4 +110,15 @@ public class Entity : MonoBehaviour
     }
     #endregion
 
+    public void MakeTransparent(bool _transparent)
+    {
+        if (_transparent)
+        {
+            sr.color = Color.clear;
+        }
+        else
+        {
+            sr.color = Color.white;
+        }
+    }
 }

@@ -19,30 +19,29 @@ public class PlayerGroundState : PlayerState
     public override void Update()
     {
         base.Update();
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            stateMachine.ChangeState(player.blackholeState);
+        }
         if (Input.GetKeyDown(KeyCode.Mouse1) && HasNoSword())
         {
             stateMachine.ChangeState(player.aimSwordState);
-            return;
         }
         if (Input.GetKeyDown(KeyCode.Q))
         {
             stateMachine.ChangeState(player.counterAttackState);
-            return;
         }
         if (Input.GetKey(KeyCode.Mouse0))
         {
             stateMachine.ChangeState(player.primaryAttackState);
-            return;
         }
         if (!player.isGroundDetected())
         {
             stateMachine.ChangeState(player.airState);
-            return;
         }
         if (Input.GetKeyDown(KeyCode.Space) && player.isGroundDetected())
         {
             stateMachine.ChangeState(player.jumpState);
-            return;
         }
     }
 
