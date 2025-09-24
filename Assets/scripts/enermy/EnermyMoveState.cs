@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnermyMoveState : EnermygGroundState
 {
-    public EnermyMoveState(Enermy _enermyBase, EnermyStateMachine _stateMachine, string _animBoolName, Enermy_Skeleton _enermy) : base(_enermyBase, _stateMachine, _animBoolName,_enermy)
+    public EnermyMoveState(Enemy _enermyBase, EnermyStateMachine _stateMachine, string _animBoolName, Enermy_Skeleton _enermy) : base(_enermyBase, _stateMachine, _animBoolName,_enermy)
     {
         this.enermy = _enermy;
     }

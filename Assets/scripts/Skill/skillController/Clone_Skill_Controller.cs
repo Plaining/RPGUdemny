@@ -47,9 +47,9 @@ public class Clone_Skill_Controller : MonoBehaviour
         Collider2D[] colliders = Physics2D.OverlapCircleAll(attackCheck.position, attackCheckRadius);
         foreach (var hit in colliders)
         {
-            if (hit.GetComponent<Enermy>() != null)
+            if (hit.GetComponent<Enemy>() != null)
             {
-                hit.GetComponent<Enermy>().Damage();
+                hit.GetComponent<Enemy>().Damage();
             }
         }
     }
@@ -59,7 +59,7 @@ public class Clone_Skill_Controller : MonoBehaviour
         float closesDistance = Mathf.Infinity;
         foreach (var hit in colliders)
         {
-            if(hit.GetComponent<Enermy>() != null)
+            if(hit.GetComponent<Enemy>() != null)
             {
                 float distanceToEnermy = Vector2.Distance(transform.position,hit.transform.position);
                 if(distanceToEnermy < closesDistance)

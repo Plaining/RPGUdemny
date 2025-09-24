@@ -135,18 +135,18 @@ public class Blackhole_skill_controller : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<Enermy>()!=null)
+        if (collision.GetComponent<Enemy>()!=null)
         {
-            collision.GetComponent<Enermy>().FreezeTime(true);
+            collision.GetComponent<Enemy>().FreezeTime(true);
             CreateHotKey(collision);
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.GetComponent<Enermy>() != null)
+        if (collision.GetComponent<Enemy>() != null)
         {
-            collision.GetComponent<Enermy>().FreezeTime(false);
+            collision.GetComponent<Enemy>().FreezeTime(false);
         }
     }
 

@@ -14,9 +14,10 @@ public class PalyerAnimationTrigger : MonoBehaviour
         Collider2D[] colliders = Physics2D.OverlapCircleAll(player.attackCheck.position, player.attackCheckRadius);
         foreach(var hit in colliders)
         {
-            if(hit.GetComponent<Enermy>()!= null)
+            if(hit.GetComponent<Enemy>()!= null)
             {
-                hit.GetComponent<Enermy>().Damage();
+                EnemyStat _target = hit.GetComponent<EnemyStat>();
+                player.stat.doDamage(_target);
             }
         }
     }

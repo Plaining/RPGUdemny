@@ -135,9 +135,9 @@ public class Sword_Skill_Controller : MonoBehaviour
                     Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 1);
                     foreach (var hit in colliders)
                     {
-                        if(hit.GetComponent<Enermy>() != null)
+                        if(hit.GetComponent<Enemy>() != null)
                         {
-                            SwordSkillDamage(hit.GetComponent<Enermy>());
+                            SwordSkillDamage(hit.GetComponent<Enemy>());
                         }
                     }
                 }
@@ -159,7 +159,7 @@ public class Sword_Skill_Controller : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, enermyTarget[targetIndex].position, bounceSpeed * Time.deltaTime);
             if (Vector2.Distance(transform.position, enermyTarget[targetIndex].position) < .1f)
             {
-                SwordSkillDamage(enermyTarget[targetIndex].GetComponent<Enermy>());
+                SwordSkillDamage(enermyTarget[targetIndex].GetComponent<Enemy>());
                 targetIndex++;
                 bounceAmount--;
                 if (bounceAmount <= 0)
@@ -181,17 +181,17 @@ public class Sword_Skill_Controller : MonoBehaviour
         {
             return;
         }
-        if(collision.GetComponent<Enermy>() != null)
+        if(collision.GetComponent<Enemy>() != null)
         {
-            Enermy enermy = collision.GetComponent<Enermy>();
+            Enemy enermy = collision.GetComponent<Enemy>();
             SwordSkillDamage(enermy);
         }
-        collision.GetComponent<Enermy>()?.Damage();
+        collision.GetComponent<Enemy>()?.Damage();
         SetupTargetsForBounds(collision);
         StuckInto(collision);
     }
 
-    private void SwordSkillDamage(Enermy enermy)
+    private void SwordSkillDamage(Enemy enermy)
     {
         enermy.Damage();
         enermy.StartCoroutine("FreezeTimerFor", freezeTimeDuration);
@@ -199,7 +199,7 @@ public class Sword_Skill_Controller : MonoBehaviour
 
     private void SetupTargetsForBounds(Collider2D collision)
     {
-        if (collision.GetComponent<Enermy>() != null)
+        if (collision.GetComponent<Enemy>() != null)
         {
             if (isBouncing && enermyTarget.Count <= 0)
             {
@@ -207,7 +207,7 @@ public class Sword_Skill_Controller : MonoBehaviour
                 Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 10);
                 foreach (var hit in colliders)
                 {
-                    if (hit.GetComponent<Enermy>() != null)
+                    if (hit.GetComponent<Enemy>() != null)
                     {
                         enermyTarget.Add(hit.transform);
                     }
@@ -219,7 +219,7 @@ public class Sword_Skill_Controller : MonoBehaviour
     /*将剑卡在目标物上*/
     private void StuckInto(Collider2D collision)
     {
-        if (pierceAmount > 0 && collision.GetComponent<Enermy>() != null)
+        if (pierceAmount > 0 && collision.GetComponent<Enemy>() != null)
         {
             pierceAmount--;
             return;

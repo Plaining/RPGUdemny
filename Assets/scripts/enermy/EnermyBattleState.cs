@@ -5,7 +5,7 @@ public class EnermyBattleState : EnermyState
     private Transform player;
     private Enermy_Skeleton enermy;
     private int moveDir;
-    public EnermyBattleState(Enermy _enermyBase, EnermyStateMachine _stateMachine, string _animBoolName, Enermy_Skeleton _enermy) : base(_enermyBase, _stateMachine, _animBoolName)
+    public EnermyBattleState(Enemy _enermyBase, EnermyStateMachine _stateMachine, string _animBoolName, Enermy_Skeleton _enermy) : base(_enermyBase, _stateMachine, _animBoolName)
     {
         this.enermy = _enermy;
     }

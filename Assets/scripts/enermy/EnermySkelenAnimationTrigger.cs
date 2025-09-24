@@ -15,8 +15,8 @@ public class EnermySkelenAnimationTrigger : MonoBehaviour
         {
             if (hit.GetComponent<Player>() != null)
             {
-                hit.GetComponent<Player
-                    >().Damage();
+                PlayerStat stat = hit.GetComponent<PlayerStat>();
+                enermy.stat.doDamage(stat);
             }
         }
     }

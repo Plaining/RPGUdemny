@@ -29,9 +29,9 @@ public class PlayerCounterAttackState : PlayerState
         Collider2D[] colliders = Physics2D.OverlapCircleAll(player.attackCheck.position, player.attackCheckRadius);
         foreach (var hit in colliders)
         {
-            if (hit.GetComponent<Enermy>() != null)
+            if (hit.GetComponent<Enemy>() != null)
             {
-                if (hit.GetComponent<Enermy>().CanBeStunned())
+                if (hit.GetComponent<Enemy>().CanBeStunned())
                 {
                     stateTimer = 10;
                     player.anim.SetBool("SuccessFulCounterAttack", true);

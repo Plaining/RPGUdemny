@@ -1,14 +1,14 @@
 using UnityEngine;
 
-public class Enermy_Skeleton : Enermy
+public class Enermy_Skeleton : Enemy
 {
     #region
     public EnermyIdleState IdleState { get; private set; }
     public EnermyAttackState AttackState { get; private set; }
     public EnermyBattleState BattleState { get; private set; }
     public EnermyMoveState MoveState { get; private set; }
-    public EnermyDeadState DeadState { get; private set; }
     public SkeletonStunnedState StunnedState { get; private set; }
+    public SkeletonDeadState skeletonDeadState { get; private set; }
     #endregion
 
     protected override void Awake()
@@ -18,8 +18,8 @@ public class Enermy_Skeleton : Enermy
         AttackState = new EnermyAttackState(this, StateMachine, "Attack", this);
         BattleState = new EnermyBattleState(this, StateMachine, "Move", this);
         MoveState = new EnermyMoveState(this, StateMachine, "Move", this);
-        DeadState = new EnermyDeadState(this, StateMachine, "Dead");
         StunnedState = new SkeletonStunnedState(this, StateMachine, "Stunned", this);
+        skeletonDeadState = new SkeletonDeadState(this, StateMachine, "Idle", this);
     }
     protected override void Start()
     {
@@ -46,5 +46,10 @@ public class Enermy_Skeleton : Enermy
         {
             return false;
         }
+    }
+    public override void Die()
+    {
+        base.Die();
+        StateMachine.ChangeState(skeletonDeadState);
     }
 }

@@ -4,7 +4,7 @@ public class EnermygGroundState : EnermyState
 {
     protected Enermy_Skeleton enermy;
     protected Transform player;
-    public EnermygGroundState(Enermy _enermyBase, EnermyStateMachine _stateMachine, string _animBoolName, Enermy_Skeleton _enermy) : base(_enermyBase, _stateMachine, _animBoolName)
+    public EnermygGroundState(Enemy _enermyBase, EnermyStateMachine _stateMachine, string _animBoolName, Enermy_Skeleton _enermy) : base(_enermyBase, _stateMachine, _animBoolName)
     {
         this.enermy = _enermy;
     }

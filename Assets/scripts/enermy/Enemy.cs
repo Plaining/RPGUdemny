@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Enermy : Entity
+public class Enemy : Entity
 {
     [Header("Stunned info")]
     public float stunnedDuration;
@@ -28,6 +28,7 @@ public class Enermy : Entity
 
     #region
     public EnermyStateMachine StateMachine { get; private set; }
+    public string lastAnimBoolname {  get; private set; }
 
     #endregion
     protected override void Awake()
@@ -45,6 +46,12 @@ public class Enermy : Entity
         base.Update();
         StateMachine.currentState.Update();
     }
+
+    public virtual void AssignLastAnimName(string _animBoolName)
+    {
+        lastAnimBoolname = _animBoolName;
+    }
+
     public virtual void FreezeTime(bool _timeFrozen)
     {
         if (_timeFrozen)

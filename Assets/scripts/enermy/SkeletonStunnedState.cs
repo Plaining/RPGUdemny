@@ -3,7 +3,7 @@ using UnityEngine;
 public class SkeletonStunnedState : EnermyState
 {
     private Enermy_Skeleton enermy;
-    public SkeletonStunnedState(Enermy _enermyBase, EnermyStateMachine _stateMachine, string _animBoolName, Enermy_Skeleton _enermy) : base(_enermyBase, _stateMachine, _animBoolName)
+    public SkeletonStunnedState(Enemy _enermyBase, EnermyStateMachine _stateMachine, string _animBoolName, Enermy_Skeleton _enermy) : base(_enermyBase, _stateMachine, _animBoolName)
     {
         this.enermy = _enermy;
     }
@@ -25,7 +25,7 @@ public class SkeletonStunnedState : EnermyState
     public override void Update()
     {
         base.Update();
-        /*if (enermy.isGroundDetected())
+        /*if (enemy.isGroundDetected())
         {
             rb.linearVelocity = new Vector2(0, rb.linearVelocityY);
         }*/

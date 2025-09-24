@@ -3,7 +3,7 @@ using UnityEngine;
 public class EnermyState 
 {
     protected EnermyStateMachine stateMachine;
-    protected Enermy _enermyBase;
+    protected Enemy _enermyBase;
     protected Rigidbody2D rb;
 
     protected float xInput;
@@ -13,7 +13,7 @@ public class EnermyState
 
     protected float stateTimer; //计时器，entry时设置一个初始值，update中不停的更新。判断方法是子类中的if条件，小于0表示倒计时到了，该停止某项操作了。
     protected bool triggerCalled = false;
-    public EnermyState(Enermy _enermy, EnermyStateMachine _stateMachine, string _animBoolName)
+    public EnermyState(Enemy _enermy, EnermyStateMachine _stateMachine, string _animBoolName)
     {
         this._enermyBase = _enermy;
         this.stateMachine = _stateMachine;
@@ -38,10 +38,12 @@ public class EnermyState
     public virtual void Exit()
     {
         _enermyBase.anim.SetBool(animBoolName, false);
+        _enermyBase.AssignLastAnimName(animBoolName);
     }
 
     public virtual void AnimationFinishTrigger()
     {
         triggerCalled = true;
     }
+    
 }

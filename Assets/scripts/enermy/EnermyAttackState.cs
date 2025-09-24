@@ -4,7 +4,7 @@ public class EnermyAttackState : EnermyState
 {
     private Enermy_Skeleton enermy;
 
-    public EnermyAttackState(Enermy _enermyBase, EnermyStateMachine _stateMachine, string _animBoolName, Enermy_Skeleton _enermy) : base(_enermyBase, _stateMachine, _animBoolName)
+    public EnermyAttackState(Enemy _enermyBase, EnermyStateMachine _stateMachine, string _animBoolName, Enermy_Skeleton _enermy) : base(_enermyBase, _stateMachine, _animBoolName)
     {
         enermy = _enermy;
     }
@@ -12,7 +12,7 @@ public class EnermyAttackState : EnermyState
     public override void Enter()
     {
         base.Enter();
-        //enermy.setZeroVelocity();
+        //enemy.setZeroVelocity();
     }
 
     public override void Exit()

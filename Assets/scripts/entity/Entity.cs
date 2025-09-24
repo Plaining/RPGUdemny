@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
+
+    #region Components
+    public CharacterStat stat {  get; private set; }
+    public CapsuleCollider2D cd { get; private set; }
+    #endregion
+
     public int facingDir { get; private set; } = 1;
     public bool facingRight = true;
     public SpriteRenderer sr { get; private set; }
@@ -40,6 +46,8 @@ public class Entity : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponentInChildren<SpriteRenderer>();
+        stat = GetComponent<CharacterStat>();
+        cd = GetComponent<CapsuleCollider2D>();
     }
 
     // Update is called once per frame
@@ -120,5 +128,10 @@ public class Entity : MonoBehaviour
         {
             sr.color = Color.white;
         }
+    }
+
+    public virtual void Die()
+    {
+
     }
 }

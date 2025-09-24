@@ -46,7 +46,7 @@ public class PlayerBlackholeState : PlayerState
             rb.linearVelocity = new Vector2(0, -.1f);
             if (!skillUsed)
             {
-                if (player.skill.blackhole.CanUserSkill())
+                if (player.skill.blackhole.CanUseSkill())
                 {
                     skillUsed = true;
                 }
