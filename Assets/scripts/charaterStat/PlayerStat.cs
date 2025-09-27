@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerStat : CharacterStat
 {
     private Player player;
-    public override void Start()
+    protected override void Start()
     {
         base.Start();
         player = GetComponent<Player>();

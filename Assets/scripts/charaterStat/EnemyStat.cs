@@ -3,7 +3,7 @@ using UnityEngine;
 public class EnemyStat :CharacterStat
 {
     private Enemy enemy;
-    public override void Start()
+    protected override void Start()
     {
         base.Start();
         enemy = GetComponent<Enemy>();

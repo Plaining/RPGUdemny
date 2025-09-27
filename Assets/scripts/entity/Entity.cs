@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
-
-    #region Components
-    public CharacterStat stat {  get; private set; }
-    public CapsuleCollider2D cd { get; private set; }
-    #endregion
-
     public int facingDir { get; private set; } = 1;
     public bool facingRight = true;
-    public SpriteRenderer sr { get; private set; }
+
+    public System.Action onFlipped;
 
     [Header("Knockback info")]
     [SerializeField] protected Vector2 knockbackDirection;
@@ -30,7 +25,10 @@ public class Entity : MonoBehaviour
     
 
     #region Components
+    public CapsuleCollider2D cd { get; private set; }
+    public CharacterStat stat {  get; private set; }
     public Animator anim { get; private set; }
+    public SpriteRenderer sr { get; private set; }
     public Rigidbody2D rb { get; private set; }
     public EntityFX fx { get; private set; }
     #endregion
@@ -104,6 +102,9 @@ public class Entity : MonoBehaviour
         facingDir *= -1;
         facingRight = !facingRight;
         transform.Rotate(0, 180, 0);
+        if (onFlipped != null) {
+            onFlipped();
+        }
     }
     public virtual void FlipController(float _x)
     {
