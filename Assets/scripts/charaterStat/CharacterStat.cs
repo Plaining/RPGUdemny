@@ -5,6 +5,8 @@ using Unity.VisualScripting;
 
 public class CharacterStat : MonoBehaviour
 {
+    private EntityFX fx;
+
     [Header("Major stats")]
     public Stat strength;// power! 1 point increase damage by 1 and crit.power by 1%
     public Stat agility; // minjie! 1 point increase evasion by 1% and crit.chance by 1%
@@ -31,6 +33,7 @@ public class CharacterStat : MonoBehaviour
     public bool isChilled; // reduce armor by 20%
     public bool isShocked; // reduct accuracy by 20%
 
+    [SerializeField] private float ailmentsDuration;
     private float ignitedTimer;
     private float chilledTimer;
     private float shockedTimer;
@@ -48,6 +51,7 @@ public class CharacterStat : MonoBehaviour
     {
         critPower.SetDefaultValue(150);
         currentHealth = GetMaxHealthValue();
+        fx = GetComponent<EntityFX>();
     }
 
     protected virtual void Update()
@@ -73,6 +77,7 @@ public class CharacterStat : MonoBehaviour
         {
             Debug.Log("Take burn damage:" + igniteDamage);
             DecreaseHeathBy(igniteDamage);
+            //fx.IgniteColorFx(igniteDamageTimer);
             if (currentHealth < 0)
             {
                 Die();
@@ -196,17 +201,20 @@ public class CharacterStat : MonoBehaviour
         if (_ignite)
         {
             isIgnited = _ignite;
-            ignitedTimer = 2;
+            ignitedTimer = ailmentsDuration;
+            fx.IgniteFxFor(ignitedTimer);
         }
         if (_chill)
         {
             isChilled = _chill;
-            chilledTimer = 2;
+            chilledTimer = ailmentsDuration;
+            fx.ChillFxFor(chilledTimer);
         }
         if (_shock)
         {
             isShocked = _shock;
-            shockedTimer = 2;
+            shockedTimer = ailmentsDuration;
+            fx.ShockFxFor(shockedTimer);
         }
 
     }

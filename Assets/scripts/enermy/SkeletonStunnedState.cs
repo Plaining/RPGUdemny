@@ -19,7 +19,7 @@ public class SkeletonStunnedState : EnermyState
     public override void Exit()
     {
         base.Exit();
-        enermy.fx.Invoke("CancelRedBlink",0);
+        enermy.fx.Invoke("CancelColorChange",0);
     }
 
     public override void Update()
