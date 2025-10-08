@@ -30,7 +30,7 @@ public class PlayerBlackholeState : PlayerState
     {
         base.Exit();
         player.rb.gravityScale = defaultGravity;
-        player.MakeTransparent(false);
+        player.fx.MakeTransparent(false);
     }
 
     // Update is called once per frame

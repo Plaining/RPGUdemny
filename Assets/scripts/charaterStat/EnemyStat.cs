@@ -8,11 +8,6 @@ public class EnemyStat :CharacterStat
         base.Start();
         enemy = GetComponent<Enemy>();
     }
-    public override void TakeDamage(int _damage)
-    {
-        base.TakeDamage(_damage);
-        enemy.Damage();
-    }
 
     protected override void Die()
     {

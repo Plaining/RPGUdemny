@@ -9,11 +9,6 @@ public class PlayerStat : CharacterStat
         base.Start();
         player = GetComponent<Player>();
     }
-    public override void TakeDamage(int _damage)
-    {
-        base.TakeDamage(_damage);
-        player.Damage();
-    }
     protected override void Die()
     {
         base.Die();

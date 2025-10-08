@@ -186,14 +186,14 @@ public class Sword_Skill_Controller : MonoBehaviour
             Enemy enermy = collision.GetComponent<Enemy>();
             SwordSkillDamage(enermy);
         }
-        collision.GetComponent<Enemy>()?.Damage();
+        //collision.GetComponent<Enemy>()?.DamageImpact();
         SetupTargetsForBounds(collision);
         StuckInto(collision);
     }
-
+     
     private void SwordSkillDamage(Enemy enermy)
     {
-        enermy.Damage();
+        player.stat.doDamage(enermy.GetComponent<CharacterStat>());
         enermy.StartCoroutine("FreezeTimerFor", freezeTimeDuration);
     }
 

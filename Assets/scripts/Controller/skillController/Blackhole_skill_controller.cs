@@ -85,7 +85,7 @@ public class Blackhole_skill_controller : MonoBehaviour
         if (playerCanDisapear)
         {
             playerCanDisapear = false;
-            PlayerManager.instance.player.MakeTransparent(true);
+            PlayerManager.instance.player.fx.MakeTransparent(true);
         }
     }
 
