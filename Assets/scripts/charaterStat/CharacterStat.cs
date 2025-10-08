@@ -151,6 +151,11 @@ public class CharacterStat : MonoBehaviour
             _targetStat.SetupIgniteDamage(Mathf.RoundToInt(_fireDamage * .2f));
         }
 
+        if (canApplyShock)
+        {
+            _targetStat.SetupShockStrikeDamage(Mathf.RoundToInt(_lightningDamage * .1f));
+        }
+
         _targetStat.ApplyAilments(canApplyIgnite, canApplyChill, canApplyShock); 
     }
 
@@ -220,43 +225,65 @@ public class CharacterStat : MonoBehaviour
         {
             if (!isShocked)
             {
-                isShocked = _shock;
-                shockedTimer = ailmentsDuration;
-                fx.ShockFxFor(shockedTimer);
+                ApplyShock(_shock);
             }
             else
             {
-
                 //find closet target, only among the enermies
                 // instanitate thunder strike
-
-                Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 25);
-                float closesDistance = Mathf.Infinity;
-                Transform closestEnermy = null;
-                foreach (var hit in colliders)
+                if (GetComponent<Player>() != null)
                 {
-                    if (hit.GetComponent<Enemy>() != null)
-                    {
-                        float distanceToEnermy = Vector2.Distance(transform.position, hit.transform.position);
-                        if (distanceToEnermy < closesDistance)
-                        {
-                            closestEnermy = hit.transform;
-                            closesDistance = distanceToEnermy;
-                        }
-                    }
+                    return;
                 }
-
-                if (closestEnermy != null) { 
-                    GameObject newShockStrike = Instantiate(shockStrikePrefab, transform.position, Quaternion.identity) as GameObject;
-                    newShockStrike.GetComponent<ShockStrike_Controller>().SetUp(shockDamage, closestEnermy.GetComponent<CharacterStat>());
-                }
+                HitNearestTargetWithShockStrike();
             }
-            
+
         }
 
     }
 
+    public void ApplyShock(bool _shock)
+    {
+        if (isShocked)
+        {
+            return;
+        }
+        isShocked = _shock;
+        shockedTimer = ailmentsDuration;
+        fx.ShockFxFor(shockedTimer);
+    }
+
+    private void HitNearestTargetWithShockStrike()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 25);
+        float closesDistance = Mathf.Infinity;
+        Transform closestEnermy = null;
+        foreach (var hit in colliders)
+        {
+            if (hit == GetComponent<Collider2D>())
+            {
+                continue;
+            }
+            if (hit.GetComponent<Enemy>() != null)
+            {
+                float distanceToEnermy = Vector2.Distance(transform.position, hit.transform.position);
+                if (distanceToEnermy < closesDistance)
+                {
+                    closestEnermy = hit.transform;
+                    closesDistance = distanceToEnermy;
+                }
+            }
+        }
+
+        if (closestEnermy != null)
+        {
+            GameObject newShockStrike = Instantiate(shockStrikePrefab, transform.position, Quaternion.identity) as GameObject;
+            newShockStrike.GetComponent<ShockStrike_Controller>().SetUp(shockDamage, closestEnermy.GetComponent<CharacterStat>());
+        }
+    }
+
     public void SetupIgniteDamage(int _damage)=>igniteDamage = _damage;
+    public void SetupShockStrikeDamage(int _damage)=>shockDamage = _damage;
 
     public virtual void TakeDamage(int _damage)
     {
