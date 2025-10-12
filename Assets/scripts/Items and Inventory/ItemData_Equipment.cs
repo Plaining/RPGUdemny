@@ -10,5 +10,5 @@ public enum EquipmentType
 [CreateAssetMenu(fileName = "ItemData_Equipment", menuName = "Data/Equipment")]
 public class ItemData_Equipment : ItemData
 {
-    
+    public EquipmentType equipmentType;
 }

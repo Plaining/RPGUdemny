@@ -105,6 +105,7 @@
     <Compile Include="Assets\scripts\enermy\EnermyIdleState.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
+    <Compile Include="Assets\scripts\ui\UI_EquipmentSlot.cs" />
     <Compile Include="Assets\scripts\player\PlayerAimSwordState.cs" />
     <Compile Include="Assets\scripts\entity\EntityFX.cs" />
     <Compile Include="Assets\scripts\Skill\Blackhole_Skill.cs" />

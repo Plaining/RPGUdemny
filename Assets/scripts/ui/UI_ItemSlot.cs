@@ -1,8 +1,9 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class UI_ItemSlot : MonoBehaviour
+public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler
 {
     [SerializeField]private Image itemImage;
     [SerializeField] private TextMeshProUGUI itemText;
@@ -27,5 +28,18 @@ public class UI_ItemSlot : MonoBehaviour
             }
         }
     }
-
+    public void CleanUpSlot()
+    {
+        item = null;
+        itemImage.sprite=null;
+        itemImage.color = Color.clear;
+        itemText.text = null;
+    }
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        if (item != null && item.data.Type == ItemType.Equipment)
+        {
+            Inventory.instance.EquipItem(item.data);
+        }
+    }
 }
