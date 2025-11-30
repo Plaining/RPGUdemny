@@ -1,8 +1,8 @@
 using System.Collections;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Player : Entity
+
 {
     [Header("Attack details")]
     public Vector2[] attackMovement;//每次攻击时，附带的移动属性

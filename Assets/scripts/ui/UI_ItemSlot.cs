@@ -35,8 +35,14 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler
         itemImage.color = Color.clear;
         itemText.text = null;
     }
-    public void OnPointerDown(PointerEventData eventData)
+
+    public virtual void OnPointerDown(PointerEventData eventData)
     {
+        if (Input.GetKey(KeyCode.LeftControl))
+        {
+            Inventory.instance.RemoveItem(item.data);
+            return;
+        }
         if (item != null && item.data.Type == ItemType.Equipment)
         {
             Inventory.instance.EquipItem(item.data);

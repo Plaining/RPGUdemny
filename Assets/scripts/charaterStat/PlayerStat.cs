@@ -9,9 +9,15 @@ public class PlayerStat : CharacterStat
         base.Start();
         player = GetComponent<Player>();
     }
+    public override void TakeDamage(int _damage)
+    {
+        base.TakeDamage(_damage);
+    }
+
     protected override void Die()
     {
         base.Die();
         player.Die();
+        GetComponent<PlayerItemDrop>().GenerateDrop();
     }
 }

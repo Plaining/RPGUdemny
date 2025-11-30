@@ -8,14 +8,6 @@
     "D:\\projects\\unity\\RPGUdemny\\Packages\\packages-lock.json"
   ],
   "outputs": {
-    "com.unity.collab-proxy@2.6.0": {
-      "name": "com.unity.collab-proxy",
-      "resolvedPath": "D:\\projects\\unity\\RPGUdemny\\Library\\PackageCache\\com.unity.collab-proxy",
-      "fingerprint": "001b54a8988a14785c8e209d6c788bb15f9e58cf",
-      "editorCompatibility": "2021.3.0f1",
-      "version": "2.6.0",
-      "source": "registry"
-    },
     "com.unity.feature.2d@2.0.1": {
       "name": "com.unity.feature.2d",
       "resolvedPath": "D:\\projects\\unity\\RPGUdemny\\Library\\PackageCache\\com.unity.feature.2d",

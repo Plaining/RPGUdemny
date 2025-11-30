@@ -47,7 +47,7 @@ public class CharacterStat : MonoBehaviour
     public int currentHealth;
 
     public System.Action onHealthChanged;
-    protected bool isDead;
+    public bool isDead { get; private set; }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected virtual void Start()
@@ -104,7 +104,7 @@ public class CharacterStat : MonoBehaviour
         DecreaseHeathBy(_damage);
         GetComponent<Entity>().DamageImpact();
         fx.StartCoroutine("FlashFX");
-        if (currentHealth <= 0 && isDead)
+        if (currentHealth <= 0 || isDead)
         {
             Die();
         }
@@ -265,7 +265,6 @@ public class CharacterStat : MonoBehaviour
     {
         if (igniteDamageTimer < 0)
         {
-            Debug.Log("Take burn damage:" + igniteDamage);
             DecreaseHeathBy(igniteDamage);
             //fx.IgniteColorFx(igniteDamageTimer);
             if (currentHealth < 0 && !isDead)

@@ -6,6 +6,7 @@ using UnityEngine.UIElements;
 public class Inventory : MonoBehaviour
 {
     public static Inventory instance;
+    public List<ItemData> startingEquipments = new List<ItemData>();
     public List<InventoryItem> inventory;
     public Dictionary<ItemData, InventoryItem> inventoryDictionary;
     public List<InventoryItem> stash;
@@ -44,6 +45,11 @@ public class Inventory : MonoBehaviour
         inventoryItemSlot = inventorySloParent.GetComponentsInChildren<UI_ItemSlot>();
         stashItemSlot = stashSlotParent.GetComponentsInChildren<UI_ItemSlot>();
         equipmentItemSlot = equipmentSlotParent.GetComponentsInChildren<UI_EquipmentSlot>();
+
+        for (int i = 0; i < startingEquipments.Count; i++)
+        {
+            AddItem(startingEquipments[i]);
+        }
     }
 
     public void EquipItem(ItemData _item)
@@ -72,7 +78,7 @@ public class Inventory : MonoBehaviour
         UpdateSlotUI();
     }
 
-    private void UnequipItem(ItemData_Equipment itemToDelete)
+    public void UnequipItem(ItemData_Equipment itemToDelete)
     {
         if (equipmentDictionary.TryGetValue(itemToDelete, out InventoryItem value))
         {
@@ -196,4 +202,38 @@ public class Inventory : MonoBehaviour
             }
         }
     }
+
+    public bool CanCraft(ItemData_Equipment _itemToCraft, List<InventoryItem> _requireMaterials)
+    {
+        List<InventoryItem> materialsToRemove = new List<InventoryItem>();
+        for (int i = 0; i < _requireMaterials.Count; i++)
+        {
+            if (stashDictionary.TryGetValue(_requireMaterials[i].data, out InventoryItem stashValue))
+            {
+                if (stashValue.stackSize < _requireMaterials[i].stackSize)
+                {
+                    Debug.Log("Not enough materails");
+                    return false;
+                }
+                else
+                {
+                    materialsToRemove.Add(stashValue);
+                }
+            }
+            else
+            {
+                Debug.Log("Not enough materials");
+                return false;
+            }
+        }
+        for (int i = 0; i < materialsToRemove.Count; i++)
+        {
+            RemoveItem(materialsToRemove[i].data);
+        }
+        AddItem(_itemToCraft);
+        Debug.Log("Here is your item");
+        return true;
+    }
+    public List<InventoryItem> GetEquipmentList() => equipment;
+    public List<InventoryItem> GetStashList() => stash;
 }
