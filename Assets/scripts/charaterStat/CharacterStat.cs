@@ -104,11 +104,10 @@ public class CharacterStat : MonoBehaviour
         DecreaseHeathBy(_damage);
         GetComponent<Entity>().DamageImpact();
         fx.StartCoroutine("FlashFX");
-        if (currentHealth <= 0 || isDead)
+        if (currentHealth <= 0 && !isDead)
         {
             Die();
         }
-
     }
 
     protected virtual void DecreaseHeathBy(int _damage)

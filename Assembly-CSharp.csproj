@@ -100,6 +100,7 @@
     <Compile Include="Assets\scripts\PlayerManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
+    <Compile Include="Assets\scripts\Controller\ThunderStrike_Controller.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ShaderPropAnimator.cs" />
     <Compile Include="Assets\scripts\enermy\EnermyStateMachine.cs" />
     <Compile Include="Assets\scripts\enermy\EnermyMoveState.cs" />
