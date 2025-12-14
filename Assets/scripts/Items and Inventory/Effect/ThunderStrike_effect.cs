@@ -1,16 +1,13 @@
 using UnityEngine;
 
-public class ThunderStrike_effect : MonoBehaviour
+[CreateAssetMenu(fileName = "Thunder strike effect", menuName = "Data/Item effect/Thunder strike")]
+public class ThunderStrike_effect : ItemEffect
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private GameObject thunderStrikePrefab;
+    public override void ExecuteEffect()
     {
-        
-    }
+        //base.ExecuteEffect();
+        GameObject newThunderStrike = Instantiate(thunderStrikePrefab);
 
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
