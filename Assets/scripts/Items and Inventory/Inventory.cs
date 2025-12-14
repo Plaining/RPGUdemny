@@ -90,7 +90,11 @@ public class Inventory : MonoBehaviour
 
     private void UpdateSlotUI()
     {
-        for(int i =0; i< equipmentItemSlot.Length; i++)
+        foreach (UI_ItemSlot slot in equipmentItemSlot)
+        {
+            slot.CleanUpSlot();
+        }
+        for (int i =0; i< equipmentItemSlot.Length; i++)
         {
             foreach (KeyValuePair<ItemData_Equipment, InventoryItem> item in equipmentDictionary)
             {
@@ -231,9 +235,21 @@ public class Inventory : MonoBehaviour
             RemoveItem(materialsToRemove[i].data);
         }
         AddItem(_itemToCraft);
-        Debug.Log("Here is your item");
         return true;
     }
     public List<InventoryItem> GetEquipmentList() => equipment;
     public List<InventoryItem> GetStashList() => stash;
+
+    public ItemData_Equipment GetEquipment(EquipmentType _type)
+    {
+        ItemData_Equipment equipmentItem = null;
+        foreach (KeyValuePair<ItemData_Equipment, InventoryItem> item in equipmentDictionary)
+        {
+            if (item.Key.equipmentType == _type)
+            {
+                equipmentItem = item.Key;
+            }
+        }
+        return equipmentItem;
+    }
 }

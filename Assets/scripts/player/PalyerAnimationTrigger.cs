@@ -18,6 +18,8 @@ public class PalyerAnimationTrigger : MonoBehaviour
             {
                 EnemyStat _target = hit.GetComponent<EnemyStat>();
                 player.stat.doDamage(_target);
+                // inventory get weapon call Item effect
+                Inventory.instance.GetEquipment(EquipmentType.Weapon)?.ExecuteItemEffect();
             }
         }
     }

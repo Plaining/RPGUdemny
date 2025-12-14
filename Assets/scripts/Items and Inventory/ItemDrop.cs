@@ -31,5 +31,6 @@ using UnityEngine;
             GameObject newDrop = Instantiate(dropProfab, transform.position, Quaternion.identity);
             Vector2 randomVelocity = new Vector2(Random.Range(-5, 5), Random.Range(12, 15));
             newDrop.GetComponent<ItemObject>().SetupItem(_itemData, randomVelocity);
+        
         }
     }
